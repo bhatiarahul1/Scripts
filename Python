@@ -1,0 +1,26 @@
+https://www.geeksforgeeks.org/basic-operators-python/
+_ ==> used for using output of the previos operation
+name=rahul 
+r=0,-5
+a=1,-4
+h=2,-3
+u=3,-2
+l=4,-1
+name[0] or [-5] will print r
+name[0:3](this is called indexing) ==> It will print rah (3 here represents 3rd character starting with 0(first character))
+name+' bhatia' = rahul bhatia (without +, it will throw an error)
+name[1:] ==> ahul
+name[:4] ==> rahu (print upto fourth character)
+name[3:16] ==> It will throw any error but print ul
+name[0] == 'b' ==> TypeError: 'str' object does not support item assignment . That means we can't change the value of strings.
+
+List:
+x=[3,5,6,7,9]
+x.(options) ==> ctrl+space
+x.append(45)==>[3, 5, 6, 7, 9, 45]
+x.insert(3,55)==>[3, 5, 6, 55, 7, 9, 45]
+x.pop()==> remove the last value
+x.pop(2)==> [3, 5, 55, 7, 9, 45]
+del x[2:] ==> [3, 5]
+x.extend([34,45,67]) ==> [3, 5, 34, 45, 67]
+x.sort() ==> [3, 5, 34, 45, 67]
