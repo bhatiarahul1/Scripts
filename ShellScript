@@ -1,0 +1,126 @@
+aws ec2 describe-snapshots --filters Name=volume-id,Values=vol-0684785281b1c4228 --query 'Snapshots[*].StartTime' --region=us-east-2 | tr -d '[]'| tr -d '""' | cut -dT -f1
+ 
+aws ec2 describe-snapshots  --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-1 month' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]'
+ 
+ 
+aws ec2 describe-snapshots --filters Name=volume-id,Values=vol-0684785281b1c4228 --query "Snapshots[*].{ID:SnapshotId,Time:StartTime}" --region=us-east-2  | tr -d '[]'| tr -d '""','{}'
+ 
+aws ec2 describe-snapshots --filters Name=volume-id,Values=vol-0684785281b1c4228 --query "Snapshots[*].{ID:SnapshotId,Time:StartTime}" --region=us-east-2  | tr -d '[]'| tr -d '""','{}' | awk '{print $NF}' | cut -dT -f1 | awk 'NF'|awk '{if(NR==1) print $0}' == > 
+ 
+ =========================================================================================================================================
+ #!/bin/bash
+start_date=$4
+domain_name=$2
+end_date=$6
+#date_validation=$start_date
+Date_Range=`date -d "$start_date + 1 month" "+%Y%m%d" 2>/dev/null`
+Comparision=`date -d "$end_date" "+%Y%m%d" 2>/dev/null`
+start_year=`echo $start_date | cut -d "-" -f1`
+end_year=`echo $end_date | cut -d "-" -f1`
+if [ "$1" != "--domain" ] || [ "$3" != "--from" ] || [ "$5" != "--to" ]
+   	then 
+		echo ""
+       	        echo "           \033[31m Usage: \033[m \033[32m sh task.sh --domain <DomainName> --from <date in YYYY-MM-DD> --to <date in YYYY-MM-DD> \033[m"
+	       	echo ""
+  	else
+if [ "$Comparision" -gt "$Date_Range" ] 
+	 then
+  		echo "\033[31m --from and --to dates should be within the range of one month \033[m"
+	else 
+if [ "$#" = 6 ] && [ "`date '+%Y-%m-%d' -d $4 2>/dev/null`" = "$4" ] && [ "`date '+%Y-%m-%d' -d $6 2>/dev/null`" = "$6" ] && [ $start_year -le $end_year ];
+   	then
+      	cd /root/a/b/c/`echo $start_date | cut -d "-" -f1`
+while true;
+ do
+       grep "$domain_name" `ls *$start_date* | grep ^access` 
+        [ $start_date \< $end_date ] || break
+         start_date=$(date -d "$start_date + 1 day" +%F)
+done
+	else
+		echo ""
+		echo  "		\033[31m Please enter the correct date format : YYYY-MM-DD and the desired number of arguments \033[m"                    
+		echo ""
+fi
+fi
+fi
+
+
+7987905633
+
+
+==========================================================================================================================
+aws ec2 describe-snapshots --filters Name=volume-id,Values=vol-0684785281b1c4228 --query "Snapshots[*].{ID:SnapshotId,Time:-StartTime}" --region=us-east-2  | tr -d '[]'| tr -d '""','{}' | awk '{print $NF}' | cut -dT -f1 | awk 'NF' | awk 'NR % 2 == 1'  > test.txt
+aws ec2 delete-snapshot --snapshot-id `cat test.txt` --region=us-east-2
+if [ "echo $? == 0" ]
+then
+ echo "\033[31m  Snapshots deletion successful \033[m"
+else
+ echo "\033[31m Error \033[m"
+fi
+
+
+==========================================================================================================================
+
+aws ec2 describe-volumes --filters Name=attachment.instance-id,Values=i-e36b4c6a --query 'Volumes[*].VolumeId' --region=us-east-1| tr -d '[],""' | awk 'NF' > test.txt
+aws ec2 describe-snapshots --filters Name=volume-id,Values=vol-021c959e7450ebed0 --region=us-east-1 --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-3 month' '+%Y-%m-%d')'") | [.SnapshotId,.StartTime]'| tr -d '[],""' | cut -dT -f1| awk 'NF' | awk 'NR % 2 == 1'
+
+================================================================================
+#!/bin/bash
+start_date=$4
+domain_name=$2
+end_date=$6
+#date_validation=$start_date
+Date_Range=`date -d "$start_date + 1 month" "+%Y%m%d" 2>/dev/null`
+Comparision=`date -d "$end_date" "+%Y%m%d" 2>/dev/null`
+start_year=`echo $start_date | cut -d "-" -f1`
+end_year=`echo $end_date | cut -d "-" -f1`
+if [ "$1" != "--domain" ] || [ "$3" != "--from" ] || [ "$5" != "--to" ]
+   	then 
+		echo ""
+       	        echo "           \033[31m Usage: \033[m \033[32m sh task.sh --domain <DomainName> --from <date in YYYY-MM-DD> --to <date in YYYY-MM-DD> \033[m"
+	       	echo ""
+  	else
+if [ "$Comparision" -gt "$Date_Range" ] 
+	 then
+  		echo "\033[31m --from and --to dates should be within the range of one month \033[m"
+	else 
+if [ "$#" = 6 ] && [ "`date '+%Y-%m-%d' -d $4 2>/dev/null`" = "$4" ] && [ "`date '+%Y-%m-%d' -d $6 2>/dev/null`" = "$6" ] && [ $start_year -le $end_year ];
+   	then
+      	cd /root/a/b/c/`echo $start_date | cut -d "-" -f1`
+while true;
+ do
+       grep "$domain_name" `ls *$start_date* | grep ^access` 
+        [ $start_date \< $end_date ] || break
+         start_date=$(date -d "$start_date + 1 day" +%F)
+done
+	else
+		echo ""
+		echo  "		\033[31m Please enter the correct date format : YYYY-MM-DD and the desired number of arguments \033[m"                    
+		echo ""
+fi
+fi
+fi
+
+=========================================================================================================================
+aws ec2 describe-volumes --filters Name=attachment.instance-id,Values=i-0c7335bb6401c3fd4 --query 'Volumes[*].VolumeId' --region=us-east-2| tr -d '[],""' | awk 'NF' > test.txt
+
+########### This will list the snapshot list based on date declared ####################################################
+for i in `cat test.txt`
+do
+#aws ec2 describe-snapshots --filters Name=volume-id,Values=$i --region=us-east-2 --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-3 month' '+%Y-%m-%d')'") | [.SnapshotId,.StartTime]'| tr -d '[],""' | cut -dT -f1| awk 'NF' | awk 'NR % 2 == 1'
+aws ec2 describe-snapshots --filters Name=volume-id,Values=vol-070289811366b31ae --query "Snapshots[*].{ID:SnapshotId,Time:StartTime}" --region=us-east-2  | tr -d '[]'| tr -d '""','{}' | awk 'NF' | awk '{print $NF}' | cut -dT -f1 | grep -B 1 "\-27" | grep snap > text.txt
+aws ec2 describe-snapshots --filters Name=volume-id,Values=$i --query "Snapshots[*].{ID:SnapshotId,Time:StartTime}" --region=us-east-2  | tr -d '[]'| tr -d '""','{}' | awk '{print $NF}' | cut -dT -f1 | awk 'NF' | awk 'NR % 2 == 1' > text1.txt
+done
+avoid=`cat text.txt`
+if [ "`aws ec2 describe-snapshots --filters Name=volume-id,Values=$i --query "Snapshots[*].{ID:SnapshotId,Time:StartTime}" --region=us-east-2  | tr -d '[]'| tr -d '""','{}' | awk '{print $NF}' | cut -dT -f1 | awk 'NF' | awk 'NR % 2 == 1'`" = "$avoid" ]
+   then
+        echo " Not deleting the snapshot for 26th "
+   else
+       for j in `cat text1.txt`
+       do  aws ec2 delete-snapshot --snapshot-id $j --region=us-east-2
+       done
+fi
+====================
+grep -B 1 "\-27" rahul.txt
+====================================
+for j in `cat test.txt`;do aws ec2 describe-snapshots --filters Name=volume-id,Values=$j --region=us-east-1 --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-2 month' '+%Y-%m-%d')'") | [.SnapshotId,.StartTime]'| tr -d '[],""' | cut -dT -f1| awk 'NF';done > test1.txt
