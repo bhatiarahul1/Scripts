@@ -1,0 +1,55 @@
+Containers are workspaces that are created to handle differnet projects.
+
+
+==>Docker Engine uses namespaces such as the following on Linux:
+
+-The pid namespace: Process isolation (PID: Process ID).
+-The net namespace: Managing network interfaces (NET: Networking).
+-The ipc namespace: Managing access to IPC resources (IPC: InterProcess Communication).
+-The mnt namespace: Managing filesystem mount points (MNT: Mount).
+-The uts namespace: Isolating kernel and version identifiers. (UTS: Unix Timesharing System).
+
+==>Control groups
+
+ -Docker Engine on Linux also relies on another technology called control groups (cgroups). 
+ -A cgroup limits an application to a specific set of resources. 
+ -Control groups allow Docker Engine to share available hardware resources to containers and optionally enforce limits and constraints. 
+ -For example, you can limit the memory available to a specific container.
+ 
+ 
+ 
+ Terraform user:
+ Access Key: AKIARZ5CK7OFLDEALYE6
+ Secret Key: 7CZ4oCrk1A1IoNZTqTqdvW1E4ch6D/96Nfu0gDXN
+ 
+ Pr@vinJ123
+ 
+ 
+ SRQ0033966619   New request -> Subnet to Subnet connectivity in PROD VPC
+ SRQ0033751994	EBS volume Expansion
+ SRQ0033849539	Isolated Environment Request
+ SRQ0033842894	Best Day | Security Compliance and Cost Optimization
+ 
+ 
+  
+    
+ 30 2 ? * Mon-Fri *
+ 
+ td-registration-api:10
+ td-home-loan-india:13
+ td-ifa:1
+ td-home-loan-india:13
+td-creditcards:8
+
+prashant.srivastava
++~$W!q2CvUb~qr!8
+
+
+rahul
+Access Key: AKIARZ5CK7OFPW4OQ5AZ
+Secret Key: 68IY9cVI6b7grTHe2MZVqu8JQzBjYLrXGipSNp0+
+
+sudo apt-get install unoconv
+doc2pdf respondus-docx-sample-file.docx
+
+		
