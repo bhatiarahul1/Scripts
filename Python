@@ -13,9 +13,9 @@ name[1:] ==> ahul
 name[:4] ==> rahu (print upto fourth character)
 name[3:16] ==> It will throw any error but print ul
 name[0] == 'b' ==> TypeError: 'str' object does not support item assignment . That means we can't change the value of strings.
-
-List:
-x=[3,5,6,7,9]
+===========================================================
+List:It is mutable, the values can be changed
+x=[3,5,6,7,9] []==> Used for list
 x.(options) ==> ctrl+space
 x.append(45)==>[3, 5, 6, 7, 9, 45]
 x.insert(3,55)==>[3, 5, 6, 55, 7, 9, 45]
@@ -24,3 +24,23 @@ x.pop(2)==> [3, 5, 55, 7, 9, 45]
 del x[2:] ==> [3, 5]
 x.extend([34,45,67]) ==> [3, 5, 34, 45, 67]
 x.sort() ==> [3, 5, 34, 45, 67]
+==============================================
+Tuple: It is immutable, values can't be changed.
+() > used for tuple
+==========================================================
+Set: Series of number of elements, repetition of elements not allowed
+{} > used for set
+z={34,55,67,32}
+z
+{32, 34, 67, 55} ==> it doesn't necessary that you get the output with same sequence
+z={34,55,67,32,55} ==> duplicacy with 55
+z
+{32, 34, 67, 55} ==> 55 is printed only once
+Indexig is not allowed in sets as the sequence is not fixed
+==================================================================
+Dictionary: These are key-value pairs
+Each key is separated from its value by a colon (:), the items are separated by commas, 
+and the whole thing is enclosed in curly braces. An empty dictionary without any items is written with just two curly braces, like this: {}.
+Keys are unique within a dictionary while values may not be. 
+The values of a dictionary can be of any type, but the keys must be of an immutable data type such as strings, numbers, or tuples.
+To access dictionary elements, you can use the familiar square brackets along with the key to obtain its value. 
