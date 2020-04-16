@@ -1,0 +1,17 @@
+apt-get update
+apt-get upgraden -y
+
+apt-get dist-upgrade -y ==> Handle software dependencies
+apt-get autoremove -y ==> Remove unwanted packages
+
+apt-get install update-manager-core ==> manages release upggrade
+do-release-upgrade
+====================================================================
+If error occured  due to python, then follow  the below steps
+Check if python3 is pointing to python 3.5. If not then;
+ls /usr/lib | grep python 
+ln -sf /usr/bin/python3.5 /usr/bin/python3
+
+cd /usr/lib/python3/dist-packages/
+ln -s apt_pkg.cpython-36m/35m-x86_64-linux-gnu.so apt_pkg.so
+do-release-upgrade
