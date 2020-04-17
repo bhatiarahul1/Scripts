@@ -1,0 +1,43 @@
+import boto3
+client = boto3.client('sns')
+ec2 = boto3.client('ec2')
+def lambda_handler(event, context):
+    reservations = ec2.describe_instances(
+        Filters=[
+            {'Name':'tag:Check','Values':['Daily']},
+        ]
+    ).get(
+        'Reservations', []
+    )
+
+    instances = [
+        i for r in reservations
+        for i in r['Instances']
+    ]
+    for item in instances:
+        #for sub in item:
+        for key,value in item.items():
+            #print(type(sub),type(item))
+            if key == "Tags":
+                #print("***",key,value,"\n**")
+                instance_name = "*"
+    
+                print(value)
+                for i in value:
+                    #print(i,type(i))
+                    for key,value in i.items():
+                        if value == 'Name':
+                            x=list(i.values())
+                            print(x[1])
+                            instance_name=x[1]
+                        
+                            
+            if key == "State":
+                state=(value['Name'])        
+                    
+        client.publish(
+                TopicArn = 'arn:aws:sns:us-east-2:124357639050:Ec2StateChange',
+                Message = 'The instance ' + instance_name + ' is ' + state
+                )
+    
+    
