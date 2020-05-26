@@ -128,3 +128,26 @@ for j in `cat test.txt`;do aws ec2 describe-snapshots --filters Name=volume-id,V
 =====================================================================================
 for i in `aws ec2 describe-images --region ap-southeast-1 --output json | jq --arg s '2020-02-01T00:00' --arg e '2020-02-29T00:00' '.Images[] | (select(.CreationDate | . >= $s and . <= $e + "z"))' | grep ImageId | tr -d '[],""' | awk '{print $NF}'`; do aws ec2 deregister-image --image-id $i --region ap-southeast-1; done
 =================================================================================================for j in `aws ec2 describe-snapshots --region ap-southeast-1 --output json | jq --arg s '2019-01-01T00:00' --arg e '2019-12-31T00:00' '.Snapshots[] | (select(.StartTime | . >= $s and . <= $e + "z"))' | grep SnapshotId | tr -d '[],""' | awk '{print $NF}'`;do aws ec2 delete-snapshot --snapshot-id $j --region ap-southeast-1;done
+
+aws ec2 describe-snapshots  --region=ap-southeast-1 --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-10 days' '+%Y-%m-%d')'") | [.Description, .StartTime, .SnapshotId]'
+===============================SNapshot Deletion===============================
+#!/bin/bash
+aws ec2 describe-snapshots  --region=ap-southeast-1 --owner self --output json | jq '.Snapshots[] | select(.StartTime < "'$(date --date='-15 days' '+%Y-%m-%d')'") | [.SnapshotId]' | tr -d '""','[]' > test.txt
+awk '$0' test.txt>final.txt
+for i in `cat final.txt`
+do
+aws ec2 delete-snapshot --snapshot-id $i --region ap-southeast-1
+done
+
+rm -f test.txt final.txt
+
+===============================AMI Deletion==================================================
+
+aws ec2 describe-images --region ap-southeast-1 --owner self --output json | jq '.Images[] | select(.CreationDate  < "'$(date --date='-15 days' '+%Y-%m-%d')'") | [.ImageId]' | tr -d '""','[]' > AMI.txt
+awk '$0' AMI.txt > AMI_final.txt
+for i in `cat AMI_final.txt`
+do
+aws ec2 deregister-image --image-id $i --region ap-southeast-1
+done
+
+rm -f AMI.txt AMI_final.txt
